@@ -87,7 +87,7 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Research Seminar, Winter 2021-2022]{GQA: A New Dataset for Real-World Visual Reasoning and Compositional Question Answering} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Research Seminar, Winter 2021-2022]{GQA: A New Dataset for Real-World Visual Reasoning and Compositional Question Answering. Hudson et al. (2019)} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Shawon Ashraf} % Your name
 \institute[IMS, Universität Stuttgart] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
@@ -122,6 +122,7 @@ Universität Stuttgart \\ % Your institution for the title page
     \item Visual Question Answering
         \begin{itemize}
             \item \textbf{Understanding} a Scene (Image) and \textbf{answering questions} on it
+            \item Semantic Reasoning
         \end{itemize}
     \item Combination of Structural and Semantic Information
         \begin{itemize}
@@ -131,7 +132,7 @@ Universität Stuttgart \\ % Your institution for the title page
     \item Scene Graphs
         \begin{itemize}
             \item Data Structure for the required \textbf{structure}
-            \item Source: Visual Gnome
+            \item Source: Visual Genome \cite{vgenome}
         \end{itemize}
 \end{itemize}
 
@@ -139,15 +140,15 @@ Universität Stuttgart \\ % Your institution for the title page
 
 \begin{frame}{Why do we need it?}
     \begin{itemize}
-        \item \textbf{Lack of diveristy in the labels} in existing datasets (CLEVR, VQA etc.)
+        \item \textbf{Lack of diveristy in the labels} in existing datasets (CLEVR \cite{clevr}, VQA \cite{vqa} etc.)
         \item Susceptible to \textbf{lucky guesses}
-        \item Exitsing approaches (such as CNN, LSTM etc.) towards the problem \textbf{can easily game} these datasets
+        \item Existing approaches (such as CNN, LSTM etc.) towards the problem \textbf{can easily game} these datasets
         \item GQA solves this problem 
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Consider this image (Source: GQA \cite{p2})}
+\frametitle{Consider this image (Source: GQA)}
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{gqa_1.png}
 \end{figure}
@@ -155,21 +156,59 @@ Universität Stuttgart \\ % Your institution for the title page
 
 
 \begin{frame}
-\frametitle{A scene graph of the previous image (Source: GQA \cite{p2})}
+\frametitle{A scene graph of the previous image (Source: GQA)}
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{scene_graph.png}
 \end{figure}
 \end{frame}
 %------------------------------------------------
 
-\section{Dataset Statistics}
+\section{Dataset}
+
+\begin{frame}
+\frametitle{Example Scene Graph Stucture in GQA}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{sg_json.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Statistics}
+   \begin{table}[H]
+        \begin{tabular}{@{}lll@{}}
+            \toprule
+            Questions  & Images  & Labels \\ \midrule
+            22,669,678 & 113,018 & 1878 \\  \bottomrule
+        \end{tabular}
+        \caption{Questions, Images and Labels in GQA}
+    \end{table}
+    
+    \begin{block}{Evaluation settings}
+        \begin{itemize}
+            \item Test Size: 5000; \textbf{Crowd Sourced}
+            \item Train:Validation $\rightarrow$ $88:12$
+        \end{itemize}
+    \end{block}
+    
+\end{frame}
+
 
 %------------------------------------------------
 
 \section{Results}
+\begin{frame}{Accuracy}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{presentation/acc_plot.png}
+\end{figure}
+\end{frame}
 %------------------------------------------------
 
 \section{Conclusion}
+\begin{frame}{Concluding GQA}
+    \begin{itemize}
+        \item Benchmark for testing semantic reasoning in models
+        \item Posted as a challenge task: \hyperlink{https://cs.stanford.edu/people/dorarad/gqa/challenge.html}{https://cs.stanford.edu/people/dorarad/gqa/challenge.html}
+    \end{itemize}
+\end{frame}
 %------------------------------------------------
 
 %------------------------------------------------
@@ -179,14 +218,22 @@ Universität Stuttgart \\ % Your institution for the title page
 \begin{frame}
 %\frametitle{References}
 \footnotesize{
+
 \begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Lian et al, 2021]{p1} Liang, Weixin  and Jiang, Yanhao  and Liu, Zixuan (2021)
-\newblock {G}ragh{VQA}: Language-Guided Graph Neural Networks for Graph-based Visual Question Answering
-\newblock \emph{Proceedings of the Third Workshop on Multimodal Artificial Intelligence} 79--86.
+\bibitem[Johnson et al, 2016]{clevr} Justin Johnson and
+               Bharath Hariharan and
+               Laurens van der Maaten and
+               Li Fei{-}Fei and
+               C. Lawrence Zitnick and
+               Ross B. Girshick (2016)
+\newblock {CLEVR:} {A} Diagnostic Dataset for Compositional Language and Elementary
+               Visual Reasoning
+\newblock \emph{arXiv} http://arxiv.org/abs/1612.06890.
 \end{thebibliography}
 
+
 \begin{thebibliography}{100} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Hudson, Manning, 2019]{p2} Drew A. Hudson and
+\bibitem[Hudson, Manning, 2019]{gqa} Drew A. Hudson and
                Christopher D. Manning (2019)
 \newblock {GQA:} a new dataset for compositional question answering over real-world images
 \newblock \emph{arXiv} http://arxiv.org/abs/1902.09506.
@@ -198,51 +245,49 @@ Universität Stuttgart \\ % Your institution for the title page
 %\frametitle{References}
 \footnotesize{
 \begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Zellers et al, 2018]{p3} Zellers, Rowan and Yatskar, Mark and Thomson, Sam and Choi, Yejin (2018)
-\newblock Neural Motifs: Scene Graph Parsing with Global Context
-\newblock \emph{Conference on Computer Vision and Pattern Recognition}.
+\bibitem[Hudson et al, 2018]{mac} Drew A. Hudson and
+               Christopher D. Manning (2018)
+\newblock Compositional Attention Networks for Machine Reasoning
+\newblock \emph{arXiv} https://arxiv.org/abs/1803.03067.
 \end{thebibliography}
+
 
 
 \begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Johnson et al, 2016]{p4} Justin Johnson and
-               Bharath Hariharan and
-               Laurens van der Maaten and
-               Li Fei{-}Fei and
+\bibitem[Antol et al, 2015]{vqa} Stanislaw Antol and
+               Aishwarya Agrawal and
+               Jiasen Lu and
+               Margaret Mitchell and
+               Dhruv Batra and
                C. Lawrence Zitnick and
-               Ross B. Girshick (2016)
-\newblock {CLEVR:} {A} Diagnostic Dataset for Compositional Language and Elementary
-               Visual Reasoning
-\newblock \emph{arXiv} http://arxiv.org/abs/1612.06890.
+               Devi Parikh (2015)
+\newblock {VQA:} Visual Question Answering
+\newblock \emph{arXiv} http://arxiv.org/abs/1505.00468.
 \end{thebibliography}
 }
+
+
 \end{frame}
 
+%------------------------------------------------
 \begin{frame}
 %\frametitle{References}
 \footnotesize{
 \begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Santoro et al, 2017]{p5} Adam Santoro and
-               David Raposo and
-               David G. T. Barrett and
-               Mateusz Malinowski and
-               Razvan Pascanu and
-               Peter W. Battaglia and
-               Timothy P. Lillicrap (2017)
-\newblock A simple neural network module for relational reasoning
-\newblock \emph{arXiv} http://arxiv.org/abs/1706.01427.
+\bibitem[Krishna et al, 2016]{vgenome} Krishna, Ranjay and Zhu, Yuke and Groth, Oliver and Johnson, Justin and Hata, Kenji and Kravitz, Joshua and Chen, Stephanie and Kalantidis, Yannis and Li, Li-Jia and Shamma, David A and others (2016)
+\newblock Visual genome: Connecting language and vision using crowdsourced dense image annotations
+\newblock \emph{arXiv} https://arxiv.org/abs/1602.07332.
 \end{thebibliography}
-
 }
-\end{frame}
 
-%------------------------------------------------
+
+\end{frame}
 
 
 %------------------------------------------------
 
 \begin{frame}
-\Huge{\centerline{The End}}
+\Huge{\centerline{Thank you!}}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
