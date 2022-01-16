@@ -44,6 +44,11 @@
 \usepackage[font=small,labelfont=bf]{caption}   % Required for specifying captions to tables and figures
 \usepackage{amsfonts, amsmath, amsthm, amssymb} % Required for math fonts, symbols and environments
 \usepackage{wrapfig}      % Allows wrapping text around tables and figures
+%\usepackage{graphicx} % Allows including images
+%\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{amsmath}
 
 
 \begin{document}
@@ -84,7 +89,7 @@
 \color{SaddleBrown} % SaddleBrown color for the introduction
 
 \section*{Introduction/Motivation}
-GQA \cite{hudson2019gqa} is a new dataset for Visual Commonsense Reasoning and Visual Question Answering. It aims to mitigate the issue with previous VQA datasets (such as CLEVR\cite{johnson2017clevr} and VQA\cite{antol2015vqa}) where models can make random guesses about answers and still end up with fairly good accuracy scores. GQA uses Scene Graphs and is designed in such a way that for models to post a good accuracy score, they have to actually understand the visual and linguistic information contained in the data. 
+GQA \cite{hudson2019gqa} is a new dataset for Visual Commonsense Reasoning and Visual Question Answering. It aims to mitigate the issue with previous VQA datasets (such as CLEVR\cite{johnson2017clevr} and VQA\cite{antol2015vqa}) where models can make random guesses about answers and still end up with fairly good accuracy scores. Furthermore, state of the art models can bank on real world priors to exploit the relatively low diverse features in them. GQA uses Scene Graphs \cite{ji2020action} to represent object relationships and  requires the models  to actually understand the visual and linguistic information contained in the data.  
 \vspace{+5mm}\\
 
 
@@ -98,120 +103,83 @@ GQA \cite{hudson2019gqa} is a new dataset for Visual Commonsense Reasoning and V
 \section*{Main Objectives}
 
 \begin{enumerate}
-\item Add more labels compared to VQA and CLEVR to increase diversity, so that the models can not get away with random guesses.
-\item Define data features in a way so that models are actually forced to learn to reason about the data.
-\item Represent objects in the images and their relationships with Scene Graphs.
+\item Include inter object relationships in data features so models have to learn to reason about them.
+\item Use scene graphs to represent relationships.
 \item Evaluate Entailment, Plausability, Validity and Grounding of the predicted answers alongside accuracy.
+\item Introduce a baseline and its comparison against human level performance as a reference for future systems.
 \end{enumerate}
 
+
+% --------------------- Scene Graphs
+\vspace{+2cm}
+\section*{Scene Graphs and Object Relationships}
+\begin{center}\vspace{1cm}
+  \includegraphics[width=0.6\linewidth]{presentation/scene_graph.png}
+  \captionof{figure}{\color{Green} Scene Graph}
+\end{center}\vspace{1cm}
+
+\begin{center}\vspace{1cm}
+  \includegraphics[width=0.6\linewidth]{poster/figures/example.png}
+  \captionof{figure}{\color{Green} Scene Graph}
+\end{center}\vspace{1cm}
 
 %----------------------------------------------------------------------------------------
 %	MATERIALS AND METHODS
 %----------------------------------------------------------------------------------------
 
 \vspace{+2cm}
-\section*{Materials and Methods}
+\section*{Methods}
 
 \begin{enumerate}
-\item Lorem ipsum dolor sit amet, consectetur.
-\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
-\item Praesent tortor libero, vulputate quis elementum a, iaculis.
-\item Phasellus a quam mauris, non varius mauris. Fusce tristique, enim tempor varius porta, elit purus commodo velit, pretium mattis ligula nisl nec ante.
+\item Combining features from the Visual Gnome Dataset with linguistic patterns from VQA 2.0
+\item Using semantic features from questions and images to reduce bias.
+\item A more structured and normalized orientation for the scene graphs, representing it in terms of object, attributes and relationships.
+\item A Questions Engine which combines relationships between objects in images and the linguistic features in descriptions of the images to generate questions.
 \item Ut adipiscing accumsan sapien, sit amet pretium.
-\item Estibulum est purus, ultricies cursus volutpat
-\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
-\item Praesent tortor libero, vulputate quis elementum a, iaculis.
+\item Baseline Models: CNN, LSTM, MAC\cite{hudson2018compositional}, CNN + LSTM
+\item Baselines compared against human performance.
 \end{enumerate}
 
-
+\columnbreak
 %------------------------------------------------
 
 \vspace{+1cm}
-\subsection*{Mathematical Section 1}
-
-Nulla vel nisl sed mauris auctor mollis non sed. 
-
-\begin{equation}
-E = mc^{2}
-\label{eqn:Einstein}
-\end{equation}
-%
-Curabitur mi sem, pulvinar quis aliquam rutrum. (1) edf (2), $\Omega=[-1,1]^3$, maecenas leo est, ornare at. $z=-1$ edf $z=1$ sed interdum felis dapibus sem. $x$ set $y$ ytruem. 
-Turpis $j$ amet accumsan enim $y$-lacina; 
-ref $k$-viverra nec porttitor $x$-lacina. 
+\subsection*{Dataset Information}
+   \begin{center}\vspace{1cm}
+        \begin{tabular}{@{}lll@{}}
+            \toprule
+            Questions  & Images  & Labels \\ \midrule
+            22,669,678 & 113,018 & 1878 \\  \bottomrule
+        \end{tabular}
+        \caption{Questions, Images and Labels in GQA}
+    \end{center}
+    
 
 \vspace{+1cm}
-\subsection*{Mathematical Section 2}
-
-Vestibulum ac diam a odio tempus congue. Vivamus id enim nisi:
-
-\begin{eqnarray}
-\cos\bar{\phi}_k Q_{j,k+1,t} + Q_{j,k+1,x}+\frac{\sin^2\bar{\phi}_k}{T\cos\bar{\phi}_k} Q_{j,k+1} &=&\nonumber\\ 
--\cos\phi_k Q_{j,k,t} + Q_{j,k,x}-\frac{\sin^2\phi_k}{T\cos\phi_k} Q_{j,k}\label{edgek}
-\end{eqnarray}
-and
-\begin{eqnarray}
-\cos\bar{\phi}_j Q_{j+1,k,t} + Q_{j+1,k,y}+\frac{\sin^2\bar{\phi}_j}{T\cos\bar{\phi}_j} Q_{j+1,k}&=&\nonumber \\
--\cos\phi_j Q_{j,k,t} + Q_{j,k,y}-\frac{\sin^2\phi_j}{T\cos\phi_j} Q_{j,k}.\label{edgej}
-\end{eqnarray} 
-%
-Nulla sed arcu arcu. Duis et ante gravida orci venenatis tincidunt. Fusce vitae lacinia metus. Pellentesque habitant morbi. $\mathbf{A}\underline{\xi}=\underline{\beta}$ Vim $\underline{\xi}$ enum nidi $3(P+2)^{2}$ lacina. Id feugain $\mathbf{A}$ nun quis; magno.
+\subsection*{Evaluation Settings}
+        \begin{itemize}
+            \item Test Size: 5000; \textbf{Crowd Sourced}
+            \item Train:Validation $\rightarrow$ $88:12$
+        \end{itemize}
 
 
 %----------------------------------------------------------------------------------------
 %	RESULTS 
 %----------------------------------------------------------------------------------------
 
-\vspace{+2cm}
+
+%\vspace{+2cm}
 \section*{Results}
-
-Describe your results.\\
-%
-\begin{wraptable}{l}{12cm} % Left or right alignment is specified in the first bracket, the width of the table is in the second
-  \begin{tabular}{l l l}
-    \toprule
-    \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-    \midrule
-    Treatment 1 & 0.0003262 & 0.562 \\
-    Treatment 2 & 0.0015681 & 0.910 \\
-    Treatment 3 & 0.0009271 & 0.296 \\
-    \bottomrule
-  \end{tabular}
-  \captionof{table}{\color{Green} Table caption}
-\end{wraptable}
-%
-Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh. Fusce tristique, enim tempor varius porta, elit purus commodo velit, pretium mattis ligula nisl nec ante.
-
-\columnbreak
-
-In hac habitasse platea dictumst. Etiam placerat, risus ac.
-
 \begin{center}\vspace{1cm}
-  \includegraphics[width=0.6\linewidth]{placeholder}
-  \captionof{figure}{\color{Green} Figure caption}
+  \includegraphics[width=0.8\linewidth]{presentation/gqa_res.png}
+  \captionof{figure}{\color{Green} Baseline models compared against human performance}
 \end{center}\vspace{1cm}
 
-Adipiscing lectus in magna blandit:
 
-\begin{center}\vspace{1cm}
-  \begin{tabular}{l l l l}
-    \toprule
-    \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
-    \midrule
-    Treatment 1 & 0.0003262 & 0.562 \\
-    Treatment 2 & 0.0015681 & 0.910 \\
-    Treatment 3 & 0.0009271 & 0.296 \\
-    \bottomrule
-  \end{tabular}
-  \captionof{table}{\color{Green} Table caption}
-\end{center}\vspace{1cm}
+
+
+
 %
-Vivamus sed nibh ac metus tristique tristique a vitae ante. Sed lobortis mi ut arcu fringilla et adipiscing ligula rutrum. Aenean turpis velit, placerat eget tincidunt nec, ornare in nisl. In placerat.
-
-\begin{center}\vspace{1cm}
-  \includegraphics[width=0.6\linewidth]{placeholder}
-  \captionof{figure}{\color{Green} Figure caption}
-\end{center}\vspace{1cm}
 
 
 %----------------------------------------------------------------------------------------
@@ -257,10 +225,6 @@ Vivamus molestie, risus tempor vehicula mattis, libero arcu volutpat purus, sed 
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
 
-\vspace{+3cm}
-\section*{Acknowledgements}
-
-Etiam fermentum, arcu ut gravida fringilla, dolor arcu laoreet justo, ut imperdiet urna arcu a arcu. Donec nec ante a dui tempus consectetur. Cras nisi turpis, dapibus sit amet mattis sed, laoreet.
 
 
 %----------------------------------------------------------------------------------------
