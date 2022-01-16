@@ -84,10 +84,8 @@
 \color{SaddleBrown} % SaddleBrown color for the introduction
 
 \section*{Introduction/Motivation}
-
-Introduce/motivate your poster.
+GQA \cite{hudson2019gqa} is a new dataset for Visual Commonsense Reasoning and Visual Question Answering. It aims to mitigate the issue with previous VQA datasets (such as CLEVR\cite{johnson2017clevr} and VQA\cite{antol2015vqa}) where models can make random guesses about answers and still end up with fairly good accuracy scores. GQA uses Scene Graphs and is designed in such a way that for models to post a good accuracy score, they have to actually understand the visual and linguistic information contained in the data. 
 \vspace{+5mm}\\
-Do you need citations \cite{Smith:2012qr}?
 
 
 %----------------------------------------------------------------------------------------
@@ -100,14 +98,10 @@ Do you need citations \cite{Smith:2012qr}?
 \section*{Main Objectives}
 
 \begin{enumerate}
-\item Lorem ipsum dolor sit amet, consectetur.
-\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
-\item Praesent tortor libero, vulputate quis elementum a, iaculis.
-\item Phasellus a quam mauris, non varius mauris. Fusce tristique, enim tempor varius porta, elit purus commodo velit, pretium mattis ligula nisl nec ante.
-\item Ut adipiscing accumsan sapien, sit amet pretium.
-\item Estibulum est purus, ultricies cursus volutpat
-\item Nullam at mi nisl. Vestibulum est purus, ultricies cursus volutpat sit amet, vestibulum eu.
-\item Praesent tortor libero, vulputate quis elementum a, iaculis.
+\item Add more labels compared to VQA and CLEVR to increase diversity, so that the models can not get away with random guesses.
+\item Define data features in a way so that models are actually forced to learn to reason about the data.
+\item Represent objects in the images and their relationships with Scene Graphs.
+\item Evaluate Entailment, Plausability, Validity and Grounding of the predicted answers alongside accuracy.
 \end{enumerate}
 
 
